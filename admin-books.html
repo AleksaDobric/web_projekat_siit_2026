@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Books</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Admin Panel - Books</h1>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="admin-books.html">Admin</a>
+</nav>
+
+<main>
+
+    <h2>Books List</h2>
+
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Price</th>
+            <th>ISBN</th>
+            <th>Actions</th>
+        </tr>
+
+        <tr>
+            <td>The Silent Horizon</td>
+            <td>Sci-Fi</td>
+            <td>15€</td>
+            <td>978-86-7543-123-4</td>
+            <td>
+                <button>Edit</button>
+                <button>Delete</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Shadow of Time</td>
+            <td>Adventure</td>
+            <td>12€</td>
+            <td>978-86-1111-222-3</td>
+            <td>
+                <button>Edit</button>
+                <button>Delete</button>
+            </td>
+        </tr>
+
+    </table>
+
+    <hr>
+
+    <h2>Add New Book</h2>
+
+    <form>
+        <input type="text" placeholder="Title"><br><br>
+        <input type="text" placeholder="Genre"><br><br>
+        <input type="number" placeholder="Price"><br><br>
+        <input type="text" placeholder="ISBN"><br><br>
+        <input type="number" placeholder="Number of Pages"><br><br>
+
+        <textarea placeholder="Description"></textarea><br><br>
+
+        <button type="button">Add Book</button>
+    </form>
+
+    <hr>
+
+    <h2>Edit Book</h2>
+
+    <form>
+        <input type="text" value="The Silent Horizon"><br><br>
+        <input type="text" value="Sci-Fi"><br><br>
+        <input type="number" value="15"><br><br>
+        <input type="text" value="978-86-7543-123-4"><br><br>
+        <input type="number" value="320"><br><br>
+
+        <textarea>U distopijskoj budućnosti...</textarea><br><br>
+
+        <button type="button">Save Changes</button>
+    </form>
+
+</main>
+
+<footer>
+    <p>Web Dizajn Projekat 2026</p>
+</footer>
+
+</body>
+</html>
