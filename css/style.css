@@ -1,108 +1,108 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: #f7f7f7;
+    background: #f4f6f8;
+    color: #1f2937;
+    overflow-x: hidden;
 }
 
-header,
-footer {
-    background: #222;
+header {
+    background: #111827;
     color: white;
-    text-align: center;
-    padding: 15px;
+    padding: 18px 16px;
+}
+
+footer {
+    background: #111827;
+    color: white;
+    padding: 15px 16px;
 }
 
 nav {
     display: flex;
-    gap: 15px;
-    padding: 12px 20px;
-    background: #eeeeee;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 16px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 nav a {
     text-decoration: none;
-    color: #222;
-    font-weight: bold;
-}
-
-nav a:hover {
-    text-decoration: underline;
+    color: #111827;
+    font-weight: 600;
 }
 
 main {
-    max-width: 850px;
-    margin: 25px auto;
-    padding: 0 15px;
+    width: 100%;
+    padding: 16px;
+    margin: 0;
 }
+
+h1, h2 {
+    text-align: center;
+    margin: 10px 0;
+}
+
+h3, h4, h5, h6 {
+    text-align: left;
+    margin: 10px 0;
+}
+
 
 .book-card {
     background: white;
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 18px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 14px;
+    margin: 0 0 14px 0;
+    max-width: 900px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
-.book-card h3 {
-    margin-top: 0;
-}
-
-.book-card a {
-    display: inline-block;
-    margin-top: 8px;
-    text-decoration: none;
-    color: #0b63ce;
-    font-weight: bold;
-}
-
-.book-card a:hover {
-    text-decoration: underline;
-}
 
 table {
     width: 100%;
+    max-width: 900px;
     border-collapse: collapse;
     background: white;
     margin-bottom: 20px;
 }
 
-th,
-td {
-    border: 1px solid #ccc;
+th, td {
+    border: 1px solid #e5e7eb;
     padding: 10px;
     text-align: left;
-}
-
-th {
-    background: #f0f0f0;
 }
 
 form input,
 form textarea {
     width: 100%;
+    max-width: 900px;
     padding: 10px;
     margin-bottom: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
 }
 
-form textarea {
-    min-height: 100px;
-    resize: vertical;
-}
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+    }
 
-button {
-    padding: 8px 14px;
-    border: none;
-    background: #222;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-}
+    main {
+        padding: 12px;
+    }
 
-button:hover {
-    opacity: 0.9;
+    .book-card,
+    table,
+    form input,
+    form textarea {
+        max-width: 100%;
+    }
 }
