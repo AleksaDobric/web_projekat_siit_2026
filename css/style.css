@@ -140,3 +140,7 @@ main {
     max-width: 800px;
     margin: auto;
 }
+
+.author-card {
+    margin: 15px 0;
+}
