@@ -136,11 +136,8 @@ form textarea {
     border-radius: 10px;
 }
 
-main {
-    max-width: 800px;
-    margin: auto;
-}
-
 .author-card {
+    max-width: 700px;
     margin: 15px 0;
+    padding: 15px;
 }
