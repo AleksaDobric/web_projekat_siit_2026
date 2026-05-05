@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Authors</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Admin Panel - Authors</h1>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="authors.html">Authors</a>
+    <a href="admin-books.html">Admin Books</a>
+    <a href="admin-authors.html">Admin Authors</a>
+    <a href="profile.html">Profile</a>
+</nav>
+
+<main>
+
+    <h2>Authors List</h2>
+
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Date of Birth</th>
+            <th>Status</th>
+            <th>Awards</th>
+            <th>Sold Copies</th>
+            <th>Manager Phone</th>
+            <th>Actions</th>
+        </tr>
+
+        <tr>
+            <td>Marko</td>
+            <td>Petrović</td>
+            <td>12-03-1985</td>
+            <td>Active</td>
+            <td>5</td>
+            <td>120000</td>
+            <td>+381 64 123-4567</td>
+            <td>
+                <button>Edit</button>
+                <button>Delete</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Ana</td>
+            <td>Jovanović</td>
+            <td>21-07-1990</td>
+            <td>Active</td>
+            <td>3</td>
+            <td>85000</td>
+            <td>+381 64 222-1111</td>
+            <td>
+                <button>Edit</button>
+                <button>Delete</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Nikola</td>
+            <td>Simić</td>
+            <td>05-11-1978</td>
+            <td>Retired</td>
+            <td>7</td>
+            <td>200000</td>
+            <td>+381 64 333-2222</td>
+            <td>
+                <button>Edit</button>
+                <button>Delete</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Jovana</td>
+            <td>Marković</td>
+            <td>18-02-1995</td>
+            <td>Active</td>
+            <td>4</td>
+            <td>65000</td>
+            <td>+381 64 444-3333</td>
+            <td>
+                <button>Edit</button>
+                <button>Delete</button>
+            </td>
+        </tr>
+
+    </table>
+
+    <hr>
+
+    <h2>Add New Author</h2>
+
+    <form>
+        <input type="text" placeholder="Name"><br><br>
+        <input type="text" placeholder="Surname"><br><br>
+        <input type="date"><br><br>
+
+        <select>
+            <option>Active</option>
+            <option>Retired</option>
+            <option>Deceased</option>
+        </select><br><br>
+
+        <input type="number" placeholder="Number of Awards"><br><br>
+        <input type="number" placeholder="Sold Copies"><br><br>
+        <input type="text" placeholder="Manager Phone"><br><br>
+
+        <textarea placeholder="Biography"></textarea><br><br>
+
+        <button type="button">Add Author</button>
+    </form>
+
+    <hr>
+
+    <h2>Edit Author</h2>
+
+    <form>
+        <input type="text" value="Marko"><br><br>
+        <input type="text" value="Petrović"><br><br>
+        <input type="date" value="1985-03-12"><br><br>
+
+        <select>
+            <option selected>Active</option>
+            <option>Retired</option>
+            <option>Deceased</option>
+        </select><br><br>
+
+        <input type="number" value="5"><br><br>
+        <input type="number" value="120000"><br><br>
+        <input type="text" value="+381 64 123-4567"><br><br>
+
+        <textarea>Marko Petrović je savremeni pisac naučne fantastike poznat po distopijskim romanima.</textarea><br><br>
+
+        <button type="button">Save Changes</button>
+    </form>
+
+</main>
+
+<footer>
+    <p>Web Dizajn Projekat 2026</p>
+</footer>
+
+</body>
+</html>
