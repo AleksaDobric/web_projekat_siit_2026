@@ -147,6 +147,21 @@ form textarea {
     margin-bottom: 15px;
 }
 
+table {
+    width: 95%;
+    max-width: 1400px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: white;
+}
+
+th,
+td {
+    border: 1px solid #e5e7eb;
+    padding: 10px;
+    text-align: center;
+}
+
 @media (max-width: 768px) {
     nav {
         flex-direction: column;

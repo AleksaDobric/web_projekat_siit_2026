@@ -8,7 +8,7 @@
 <body>
 
 <header>
-    <h1>Admin Panel - Authors</h1>
+    <h1>Admin Panel - Autori</h1>
 </header>
 
 <nav>
@@ -21,77 +21,26 @@
 
 <main>
 
-    <h2>Authors List</h2>
+    <h2>Lista Autora</h2>
 
     <table border="1" cellpadding="8">
-        <tr>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Date of Birth</th>
-            <th>Status</th>
-            <th>Awards</th>
-            <th>Sold Copies</th>
-            <th>Manager Phone</th>
-            <th>Actions</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Date of Birth</th>
+                <th>Status</th>
+                <th>Awards</th>
+                <th>Sold Copies</th>
+                <th>Manager Phone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
 
-        <tr>
-            <td>Marko</td>
-            <td>Petrović</td>
-            <td>12-03-1985</td>
-            <td>Active</td>
-            <td>5</td>
-            <td>120000</td>
-            <td>+381 64 123-4567</td>
-            <td>
-                <button>Edit</button>
-                <button>Delete</button>
-            </td>
-        </tr>
+    <tbody id="authors-table-body">
 
-        <tr>
-            <td>Ana</td>
-            <td>Jovanović</td>
-            <td>21-07-1990</td>
-            <td>Active</td>
-            <td>3</td>
-            <td>85000</td>
-            <td>+381 64 222-1111</td>
-            <td>
-                <button>Edit</button>
-                <button>Delete</button>
-            </td>
-        </tr>
-
-        <tr>
-            <td>Nikola</td>
-            <td>Simić</td>
-            <td>05-11-1978</td>
-            <td>Retired</td>
-            <td>7</td>
-            <td>200000</td>
-            <td>+381 64 333-2222</td>
-            <td>
-                <button>Edit</button>
-                <button>Delete</button>
-            </td>
-        </tr>
-
-        <tr>
-            <td>Jovana</td>
-            <td>Marković</td>
-            <td>18-02-1995</td>
-            <td>Active</td>
-            <td>4</td>
-            <td>65000</td>
-            <td>+381 64 444-3333</td>
-            <td>
-                <button>Edit</button>
-                <button>Delete</button>
-            </td>
-        </tr>
-
-    </table>
+    </tbody>
+</table>
 
     <hr>
 
@@ -146,6 +95,12 @@
 <footer>
     <p>Web Dizajn Projekat 2026</p>
 </footer>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<script src="js/firebase.js"></script>
+<script src="js/admin-authors.js"></script>
 
 </body>
 </html>
