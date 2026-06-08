@@ -1,6 +1,6 @@
 const container = document.getElementById("authors-container");
 
-db.ref("autori").on("value", (snapshot) => {
+db.ref("autori").once("value", (snapshot) => {
     const data = snapshot.val();
 
     container.innerHTML = "";
@@ -18,6 +18,10 @@ db.ref("autori").on("value", (snapshot) => {
                 <p>${author.biografija?.substring(0, 120)}...</p>
             </div>
         `;
+
+        card.addEventListener("click", () => {
+            window.location.href = `author-details.html?id=${id}`;
+        });
 
         container.appendChild(card);
     }
