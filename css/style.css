@@ -11,16 +11,11 @@ body {
     overflow-x: hidden;
 }
 
-header {
-    background: #111827;
-    color: white;
-    padding: 18px 16px;
-}
-
+header,
 footer {
     background: #111827;
     color: white;
-    padding: 15px 16px;
+    padding: 18px 16px;
 }
 
 nav {
@@ -28,7 +23,7 @@ nav {
     flex-wrap: wrap;
     gap: 12px;
     padding: 12px 16px;
-    background: #ffffff;
+    background: #fff;
     border-bottom: 1px solid #e5e7eb;
 }
 
@@ -41,7 +36,6 @@ nav a {
 main {
     width: 100%;
     padding: 16px;
-    margin: 0;
 }
 
 h1, h2 {
@@ -50,21 +44,18 @@ h1, h2 {
 }
 
 h3, h4, h5, h6 {
-    text-align: left;
     margin: 10px 0;
 }
-
 
 .book-card {
     background: white;
     border: 1px solid #e5e7eb;
     border-radius: 10px;
     padding: 14px;
-    margin: 0 0 14px 0;
+    margin-bottom: 14px;
     max-width: 900px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
-
 
 table {
     width: 100%;
@@ -90,6 +81,58 @@ form textarea {
     border-radius: 6px;
 }
 
+#authors-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.author-card {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background: #f5f5f5;
+
+    transition: 0.2s ease;
+}
+
+.author-card:hover {
+    transform: scale(1.02);
+    background: #eeeeee;
+}
+
+.author-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.author-card div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.author-card h3 {
+    margin: 0;
+}
+
+.author-profile {
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
 @media (max-width: 768px) {
     nav {
         flex-direction: column;
@@ -105,36 +148,4 @@ form textarea {
     form textarea {
         max-width: 100%;
     }
-}
-
-.author-card {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-
-    max-width: 700px;
-    margin: 15px 0;
-    padding: 15px;
-
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    background: #f5f5f5;
-}
-
-.author-card img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-}
-
-.author-card h3 {
-    margin-top: 0;
-}
-
-.author-profile {
-    max-width: 700px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
 }
