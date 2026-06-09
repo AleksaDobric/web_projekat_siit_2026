@@ -32,7 +32,7 @@
                 <th>Статус</th>
                 <th>Награде</th>
                 <th>Број продатих копија</th>
-                <th>Телефон менаџера</th>
+                <th>Контакт телефон менаџера</th>
                 <th>Акције</th>
             </tr>
         </thead>
@@ -49,17 +49,17 @@
     <form id="add-author-form">
         <input type="text" name="name" placeholder="Име"><br><br>
         <input type="text" name="surname" placeholder="Презиме"><br><br>
-        <input type="date" name="date"><br><br>
+        <input type="date" name="date" placeholder="Датум рођења"><br><br>
 
-        <select name="status">
+        <select name="status" placeholder="Статус">
             <option value="Активан">Активан</option>
             <option value="У пензији">У пензији</option>
-    <option value="Преминуо">Преминуо</option>
+            <option value="Преминуо">Преминуо</option>
         </select><br><br>
 
-        <input type="number" name="awards" placeholder="Број награда"><br><br>
+        <input type="number" name="awards" placeholder="Број освојених награда"><br><br>
         <input type="number" name="sold" placeholder="Број продатих копија"><br><br>
-        <input type="text" name="phone" placeholder="Телефон менаџера"><br><br>
+        <input type="text" name="phone" placeholder="Контакт телефон менаџера"><br><br>
 
         <textarea name="bio" placeholder="Биографија"></textarea><br><br>
 
@@ -69,21 +69,21 @@
     <hr>
 
     <h2>Измени Аутора</h2>
-
+    
     <form id="edit-author-form">
-        <input type="text" name="name" value=""><br><br>
-        <input type="text" name="surname" value=""><br><br>
-        <input type="date" name="date" value=""><br><br>
+        <input type="text" name="name" placeholder="Име"><br><br>
+        <input type="text" name="surname" placeholder="Презиме"><br><br>
+        <input type="date" name="date" placeholder="Датум рођења"><br><br>
 
-        <select name="status">
+        <select name="status" placeholder="Статус">
             <option value="Активан">Активан</option>
             <option value="У пензији">У пензији</option>
             <option value="Преминуо">Преминуо</option>
         </select><br><br>
-
-        <input type="number" name="awards" value=""><br><br>
-        <input type="number" name="sold" value=""><br><br>
-        <input type="text" name="phone" value=""><br><br>
+        
+        <input type="number" name="awards" placeholder="Број освојених награда"><br><br>
+        <input type="number" name="sold" placeholder="Број продатих копија"><br><br>
+        <input type="text" name="phone" placeholder="Контакт телефон менаџера"><br><br>
 
         <textarea name="bio" placeholder="Биографија"></textarea><br><br>
 
@@ -101,6 +101,8 @@
 
 <script src="js/firebase.js"></script>
 <script src="js/admin-authors.js"></script>
+
+<div id="toast" class="toast"></div>
 
 </body>
 </html>
