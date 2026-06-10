@@ -1,5 +1,6 @@
 const tableBody = document.getElementById("authors-table-body");
-const form = document.querySelectorAll("form")[1];
+const addForm = document.querySelectorAll("form")[0];
+const editForm = document.querySelectorAll("form")[1];
 
 const fieldLabels = {
     ime: "Име",
@@ -55,7 +56,11 @@ function scrollToForm(form) {
 
 function deleteAuthor(id) {
     if (confirm("Да ли сте сигурни да желите да обришете овог аутора?")) {
-        db.ref("autori/" + id).remove().then(loadAuthors);
+        db.ref("autori/" + id).remove()
+            .then(() => {
+                showToast("Аутор успешно обрисан!");
+                loadAuthors();
+            });;
     }
 }
 
@@ -112,7 +117,10 @@ function validateAuthor(author) {
         return false;
     }
 
-    if (!nameRegex.test(author.prezime.trim())) {
+    if (
+        author.prezime.trim() !== "" &&
+        !nameRegex.test(author.prezime.trim())
+    ) {
         showToast("Презиме мора да садржи само слова.", "error");
         return false;
     }
@@ -166,9 +174,9 @@ function loadAuthors() {
             row.querySelector(".delete-btn").onclick = () => deleteAuthor(id);
 
             row.querySelector(".edit-btn").onclick = () => {
-                fillForm(form, author);
-                form.setAttribute("data-edit-id", id);
-                scrollToForm(form);
+                fillForm(editForm, author);
+                editForm.setAttribute("data-edit-id", id);
+                scrollToForm(editForm);
             };
 
             tableBody.appendChild(row);
@@ -176,18 +184,37 @@ function loadAuthors() {
     });
 }
 
-form.querySelector("button").onclick = () => {
-    const id = form.getAttribute("data-edit-id");
+addForm.querySelector("button").onclick = () => {
 
-    const updated = getFormData(form);
+    const author = getFormData(addForm);
+
+    if (!validateRequiredFields(author)) return;
+    if (!validateAuthor(author)) return;
+
+    db.ref("autori").push(author)
+        .then(() => {
+            addForm.reset();
+            showToast("Аутор успешно додат!");
+            loadAuthors();
+        })
+        .catch(err => {
+            console.error(err);
+            showToast("Грешка при додавању аутора.", "error");
+        });
+};
+
+editForm.querySelector("button").onclick = () => {
+    const id = editForm.getAttribute("data-edit-id");
+
+    const updated = getFormData(editForm);
 
     if (!validateRequiredFields(updated)) return;
     if (!validateAuthor(updated)) return;
 
     db.ref("autori/" + id).update(updated)
         .then(() => {
-            form.removeAttribute("data-edit-id");
-            form.reset();
+            editForm.removeAttribute("data-edit-id");
+            editForm.reset();
             showToast("Аутор успешно измењен!");
             loadAuthors();
         })
