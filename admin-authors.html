@@ -23,6 +23,10 @@
 
     <h2>Листа Аутора</h2>
 
+    <div class="actions">
+        <button id="open-add">➕ Додај аутора</button>
+    </div>
+
     <table border="1" cellpadding="8">
         <thead>
             <tr>
@@ -31,9 +35,9 @@
                 <th>Датум рођења</th>
                 <th>Статус</th>
                 <th>Награде</th>
-                <th>Број продатих копија</th>
+                <th>Број продатих примерака</th>
                 <th>Контакт телефон менаџера</th>
-                <th>Акције</th>
+                <th>Опције</th>
             </tr>
         </thead>
 
@@ -42,55 +46,65 @@
     </tbody>
 </table>
 
-    <hr>
+<div id="add-modal" class="modal">
+  <div class="modal-content">
 
-    <h2>Додај Новог Аутора</h2>
+    <h2>Додај аутора</h2>
 
     <form id="add-author-form">
         <input type="text" name="name" placeholder="Име"><br><br>
-        <input type="text" name="surname" placeholder="Презиме"><br><br>
+        <input type="text" name="surname" placeholder="Презиме (није обавезно)"><br><br>
         <input type="date" name="date"><br><br>
 
         <select name="status">
-            <option value="" selected disabled>Статус</option>
+            <option value="disable" disabled selected>Статус</option>
             <option value="Активан">Активан</option>
             <option value="У пензији">У пензији</option>
             <option value="Преминуо">Преминуо</option>
         </select><br><br>
 
         <input type="number" name="awards" placeholder="Број освојених награда"><br><br>
-        <input type="number" name="sold" placeholder="Број продатих копија"><br><br>
-        <input type="text" name="phone" placeholder="Контакт телефон менаџера"><br><br>
+        <input type="number" name="sold" placeholder="Број продатих примерака"><br><br>
+        <input type="text" name="phone" placeholder="Контакт телефон менаџера (+381 65 123-4567)"><br><br>
+        <input type="text" name="image" placeholder="Слика (URL)"><br><br>
 
         <textarea name="bio" placeholder="Биографија"></textarea><br><br>
 
         <button type="button">Додај аутора</button>
     </form>
 
-    <hr>
+  </div>
+</div>
 
-    <h2>Измени Аутора</h2>
-    
+<div id="edit-modal" class="modal">
+  <div class="modal-content">
+
+    <h2>Измени аутора</h2>
+
     <form id="edit-author-form">
-        <input type="text" name="name" placeholder="Име"><br><br>
-        <input type="text" name="surname" placeholder="Презиме"><br><br>
+         <input type="text" name="name" placeholder="Име"><br><br>
+        <input type="text" name="surname" placeholder="Презиме (није обавезно)"><br><br>
         <input type="date" name="date"><br><br>
 
         <select name="status">
-            <option value="" selected disabled>Статус</option>
+            <option value="disable" disabled selected>Статус</option>
             <option value="Активан">Активан</option>
             <option value="У пензији">У пензији</option>
             <option value="Преминуо">Преминуо</option>
         </select><br><br>
-        
+
         <input type="number" name="awards" placeholder="Број освојених награда"><br><br>
-        <input type="number" name="sold" placeholder="Број продатих копија"><br><br>
-        <input type="text" name="phone" placeholder="Контакт телефон менаџера"><br><br>
+        <input type="number" name="sold" placeholder="Број продатих примерака"><br><br>
+        <input type="text" name="phone" placeholder="Контакт телефон менаџера (+381 65 123-4567)"><br><br>
+        <input type="text" name="image" placeholder="Слика (URL)"><br><br>
 
         <textarea name="bio" placeholder="Биографија"></textarea><br><br>
 
         <button type="button">Сачувај измене</button>
     </form>
+
+  </div>
+</div>
 
 </main>
 

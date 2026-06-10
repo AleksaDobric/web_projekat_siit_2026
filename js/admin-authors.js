@@ -1,6 +1,10 @@
 const tableBody = document.getElementById("authors-table-body");
-const addForm = document.querySelectorAll("form")[0];
-const editForm = document.querySelectorAll("form")[1];
+
+const addForm = document.getElementById("add-author-form");
+const editForm = document.getElementById("edit-author-form");
+
+const addModal = document.getElementById("add-modal");
+const editModal = document.getElementById("edit-modal");
 
 const fieldLabels = {
     ime: "Име",
@@ -10,6 +14,7 @@ const fieldLabels = {
     brojOsvojenihNagrada: "Број освојених награда",
     brojProdatihPrimeraka: "Број продатих копија",
     kontaktTelefonMenadzera: "Телефон менаџера",
+    slike: "Слика",
     biografija: "Биографија"
 };
 
@@ -32,6 +37,7 @@ function getFormData(form) {
         brojOsvojenihNagrada: form.elements["awards"].value,
         brojProdatihPrimeraka: form.elements["sold"].value,
         kontaktTelefonMenadzera: form.elements["phone"].value,
+        slike: form.elements["image"].value ? [form.elements["image"].value] : [],
         biografija: form.elements["bio"].value
     };
 }
@@ -44,14 +50,8 @@ function fillForm(form, author) {
     form.elements["awards"].value = author.brojOsvojenihNagrada;
     form.elements["sold"].value = author.brojProdatihPrimeraka;
     form.elements["phone"].value = author.kontaktTelefonMenadzera;
+    form.elements["image"].value = author.slike?.[0] || "";
     form.elements["bio"].value = author.biografija;
-}
-
-function scrollToForm(form) {
-    window.scrollTo({
-        top: form.offsetTop - 60,
-        behavior: "smooth"
-    });
 }
 
 function deleteAuthor(id) {
@@ -95,6 +95,7 @@ function validateRequiredFields(author) {
         "brojOsvojenihNagrada",
         "brojProdatihPrimeraka",
         "kontaktTelefonMenadzera",
+        "slike",
         "biografija"
     ];
 
@@ -110,7 +111,7 @@ function validateRequiredFields(author) {
 
 function validateAuthor(author) {
     const nameRegex = /^[\p{L}\s]+$/u;
-    const phoneRegex = /^\+?[0-9\s-]+$/;
+    const phoneRegex = /^\+381\s\d{2}\s\d{3}-\d{4}$/;
 
     if (!nameRegex.test(author.ime.trim())) {
         showToast("Име мора да садржи само слова.", "error");
@@ -176,7 +177,8 @@ function loadAuthors() {
             row.querySelector(".edit-btn").onclick = () => {
                 fillForm(editForm, author);
                 editForm.setAttribute("data-edit-id", id);
-                scrollToForm(editForm);
+                editModal.style.display = "flex";
+                document.body.classList.add("modal-open");
             };
 
             tableBody.appendChild(row);
@@ -194,6 +196,8 @@ addForm.querySelector("button").onclick = () => {
     db.ref("autori").push(author)
         .then(() => {
             addForm.reset();
+            addModal.style.display = "none";
+            document.body.classList.remove("modal-open");
             showToast("Аутор успешно додат!");
             loadAuthors();
         })
@@ -215,6 +219,8 @@ editForm.querySelector("button").onclick = () => {
         .then(() => {
             editForm.removeAttribute("data-edit-id");
             editForm.reset();
+            editModal.style.display = "none";
+            document.body.classList.remove("modal-open");
             showToast("Аутор успешно измењен!");
             loadAuthors();
         })
@@ -222,3 +228,22 @@ editForm.querySelector("button").onclick = () => {
 };
 
 loadAuthors();
+
+const openAddBtn = document.getElementById("open-add");
+
+openAddBtn.onclick = () => {
+    addModal.style.display = "flex";
+    document.body.classList.add("modal-open");
+};
+
+window.onclick = (e) => {
+    if (e.target === addModal) {
+        addModal.style.display = "none";
+        document.body.classList.remove("modal-open");
+    }
+
+    if (e.target === editModal) {
+        editModal.style.display = "none";
+        document.body.classList.remove("modal-open");
+    }
+};
