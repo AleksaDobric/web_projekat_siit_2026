@@ -2,13 +2,14 @@
 <html lang="sr">
 <head>
     <meta charset="UTF-8">
-    <title>Admin - Books</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin – Knjige</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <header>
-    <h1>Admin Panel - Books</h1>
+    <h1>Admin Panel – Knjige</h1>
 </header>
 
 <nav>
@@ -17,123 +18,111 @@
     <a href="admin-books.html">Admin Books</a>
     <a href="admin-authors.html">Admin Authors</a>
     <a href="profile.html">Profile</a>
-
 </nav>
 
 <main>
 
-    <h2>Books List</h2>
+    <div id="delete-modal-overlay" class="modal-overlay hidden">
+        <div class="modal-box modal-box--small">
+            <h3>Potvrda brisanja</h3>
+            <p>Da li ste sigurni da želite da obrišete ovu knjigu? Ova akcija se ne može poništiti.</p>
+            <div class="modal-actions">
+                <button id="btn-confirm-delete" class="btn-danger">Obriši</button>
+                <button id="btn-cancel-delete" class="btn-secondary">Otkaži</button>
+            </div>
+        </div>
+    </div>
 
-    <table border="1" cellpadding="8">
-        <tr>
-            <th>Title</th>
-            <th>Genre</th>
-            <th>Price</th>
-            <th>ISBN</th>
-            <th>Actions</th>
-        </tr>
-
-        <tr>
-            <td>The Silent Horizon</td>
-            <td>Sci-Fi</td>
-            <td>15€</td>
-            <td>978-86-7543-123-4</td>
-            <td>
-                <button>Edit</button>
-                <button>Delete</button>
-            </td>
-        </tr>
-
-        <tr>
-            <td>Shadow of Time</td>
-            <td>Adventure / Sci-Fi</td>
-            <td>12€</td>
-            <td>978-86-1111-222-3</td>
-            <td>
-                <button>Edit</button>
-                <button>Delete</button>
-            </td>
-        </tr>
-
-        <tr>
-            <td>Whispers of the Forest</td>
-            <td>Fantasy</td>
-            <td>14€</td>
-            <td>978-86-3333-444-5</td>
-            <td>
-                <button>Edit</button>
-                <button>Delete</button>
-            </td>
-        </tr>
-
-        <tr>
-            <td>Broken Reality</td>
-            <td>Drama</td>
-            <td>10€</td>
-            <td>978-86-9999-888-1</td>
-            <td>
-                <button>Edit</button>
-                <button>Delete</button>
-            </td>
-        </tr>
-
-    </table>
+    <h2>Lista knjiga</h2>
+    <div id="books-table-container"><p>Učitavanje...</p></div>
 
     <hr>
 
-    <h2>Add New Book</h2>
+    <h2>Dodaj novu knjigu</h2>
+    <form id="add-book-form" novalidate>
+        <label>Naziv *</label>
+        <input type="text" id="add-naziv" placeholder="Naziv knjige">
+        <span class="field-error" id="err-add-naziv"></span>
 
-    <form>
-        <label>
-            <input type="text" placeholder="Title">
-        </label><br><br>
-        <label>
-            <input type="text" placeholder="Genre">
-        </label><br><br>
-        <label>
-            <input type="number" placeholder="Price">
-        </label><br><br>
-        <label>
-            <input type="text" placeholder="ISBN">
-        </label><br><br>
-        <label>
-            <input type="number" placeholder="Number of Pages">
-        </label><br><br>
+        <label>Opis *</label>
+        <textarea id="add-opis" placeholder="Opis knjige" rows="3"></textarea>
+        <span class="field-error" id="err-add-opis"></span>
 
-        <label>
-            <textarea placeholder="Description"></textarea>
-        </label><br><br>
+        <label>Žanr *</label>
+        <input type="text" id="add-zanr" placeholder="npr. Sci-Fi">
+        <span class="field-error" id="err-add-zanr"></span>
 
-        <button type="button">Add Book</button>
+        <label>Format</label>
+        <input type="text" id="add-format" placeholder="npr. Meki povez">
+
+        <label>Cena (RSD) *</label>
+        <input type="number" id="add-cena" placeholder="npr. 1500" min="0">
+        <span class="field-error" id="err-add-cena"></span>
+
+        <label>Broj strana *</label>
+        <input type="number" id="add-strana" placeholder="npr. 320" min="1">
+        <span class="field-error" id="err-add-strana"></span>
+
+        <label>ISBN * <small>(format: 978-XX-XXXX-XXX-X ili 9788612345678)</small></label>
+        <input type="text" id="add-isbn" placeholder="978-86-7543-123-4">
+        <span class="field-error" id="err-add-isbn"></span>
+
+        <label>ID Autora</label>
+        <select id="add-autor"><option value="">— Izaberi autora —</option></select>
+        <span class="field-error" id="err-add-autor"></span>
+
+        <label>Slike (URL-ovi, jedan po liniji)</label>
+        <textarea id="add-slike" placeholder="https://..." rows="3"></textarea>
+
+        <button type="submit" class="btn-primary">Dodaj knjigu</button>
+        <span class="field-error" id="err-add-general"></span>
     </form>
 
     <hr>
 
-    <h2>Edit Book</h2>
+    <div id="edit-section" class="hidden">
+        <h2>Izmeni knjigu</h2>
+        <form id="edit-book-form" novalidate>
+            <input type="hidden" id="edit-id">
 
-    <form>
-        <label>
-            <input type="text" value="The Silent Horizon">
-        </label><br><br>
-        <label>
-            <input type="text" value="Sci-Fi">
-        </label><br><br>
-        <label>
-            <input type="number" value="15">
-        </label><br><br>
-        <label>
-            <input type="text" value="978-86-7543-123-4">
-        </label><br><br>
-        <label>
-            <input type="number" value="320">
-        </label><br><br>
+            <label>Naziv *</label>
+            <input type="text" id="edit-naziv">
+            <span class="field-error" id="err-edit-naziv"></span>
 
-        <label>
-            <textarea>U distopijskoj budućnosti gde AI kontroliše društvo...</textarea>
-        </label><br><br>
+            <label>Opis *</label>
+            <textarea id="edit-opis" rows="3"></textarea>
+            <span class="field-error" id="err-edit-opis"></span>
 
-        <button type="button">Save Changes</button>
-    </form>
+            <label>Žanr *</label>
+            <input type="text" id="edit-zanr">
+            <span class="field-error" id="err-edit-zanr"></span>
+
+            <label>Format</label>
+            <input type="text" id="edit-format">
+
+            <label>Cena (RSD) *</label>
+            <input type="number" id="edit-cena" min="0">
+            <span class="field-error" id="err-edit-cena"></span>
+
+            <label>Broj strana *</label>
+            <input type="number" id="edit-strana" min="1">
+            <span class="field-error" id="err-edit-strana"></span>
+
+            <label>ISBN *</label>
+            <input type="text" id="edit-isbn">
+            <span class="field-error" id="err-edit-isbn"></span>
+
+            <label>Autor</label>
+            <select id="edit-autor"><option value="">— Izaberi autora —</option></select>
+
+            <label>Slike (URL-ovi, jedan po liniji)</label>
+            <textarea id="edit-slike" rows="3"></textarea>
+
+            <button type="submit" class="btn-primary">Sačuvaj izmene</button>
+            <button type="button" id="btn-cancel-edit" class="btn-secondary">Otkaži</button>
+            <span class="field-error" id="err-edit-general"></span>
+        </form>
+    </div>
 
 </main>
 
@@ -141,5 +130,181 @@
     <p>Web Dizajn Projekat 2026</p>
 </footer>
 
+<script type="module">
+    import { db } from "./js/firebase-config.js";
+    import "./js/auth.js";
+    import {
+        ref, get, push, set, remove, update
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+    const ISBN_REGEX = /^(978|979)-?\d{1,5}-?\d{1,7}-?\d{1,6}-?\d$/;
+
+    let allAuthors = {};
+    let pendingDeleteId = null;
+
+    // ── Load authors for selects ──
+    async function loadAuthors() {
+        const snap = await get(ref(db, "autori"));
+        if (!snap.exists()) return;
+        allAuthors = snap.val();
+        const options = Object.entries(allAuthors)
+            .map(([id, a]) => `<option value="${id}">${a.ime} ${a.prezime}</option>`)
+            .join("");
+        document.getElementById("add-autor").insertAdjacentHTML("beforeend", options);
+        document.getElementById("edit-autor").insertAdjacentHTML("beforeend", options);
+    }
+
+
+    async function loadBooks() {
+        const snap = await get(ref(db, "knjige"));
+        const container = document.getElementById("books-table-container");
+        if (!snap.exists()) {
+            container.innerHTML = "<p>Nema knjiga.</p>";
+            return;
+        }
+        const books = snap.val();
+        const rows = Object.entries(books).map(([id, b]) => {
+            const authorName = b.idAutora && allAuthors[b.idAutora]
+                ? `${allAuthors[b.idAutora].ime} ${allAuthors[b.idAutora].prezime}`
+                : "N/A";
+            return `
+        <tr>
+          <td><a href="book.html?id=${id}">${b.naziv}</a></td>
+          <td>${b.zanr || "N/A"}</td>
+          <td>${b.cena ? b.cena + " RSD" : "N/A"}</td>
+          <td>${b.isbn || "N/A"}</td>
+          <td>${authorName}</td>
+          <td>
+            <button class="btn-edit btn-secondary" data-id="${id}">Izmeni</button>
+            <button class="btn-delete btn-danger" data-id="${id}">Obriši</button>
+          </td>
+        </tr>`;
+        }).join("");
+
+        container.innerHTML = `
+      <table>
+        <thead><tr>
+          <th>Naziv</th><th>Žanr</th><th>Cena</th><th>ISBN</th><th>Autor</th><th>Akcije</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+
+        container.querySelectorAll(".btn-edit").forEach(btn =>
+            btn.addEventListener("click", () => openEdit(btn.dataset.id, snap.val()[btn.dataset.id]))
+        );
+        container.querySelectorAll(".btn-delete").forEach(btn =>
+            btn.addEventListener("click", () => openDeleteModal(btn.dataset.id))
+        );
+    }
+
+
+    function validateBook(prefix) {
+        let valid = true;
+        const clearErr = id => document.getElementById(id).textContent = "";
+        const setErr = (id, msg) => { document.getElementById(id).textContent = msg; valid = false; };
+
+        ["naziv","opis","zanr","cena","strana","isbn"].forEach(f => clearErr(`err-${prefix}-${f}`));
+
+        const naziv = document.getElementById(`${prefix}-naziv`).value.trim();
+        const opis = document.getElementById(`${prefix}-opis`).value.trim();
+        const zanr = document.getElementById(`${prefix}-zanr`).value.trim();
+        const cena = document.getElementById(`${prefix}-cena`).value;
+        const strana = document.getElementById(`${prefix}-strana`).value;
+        const isbn = document.getElementById(`${prefix}-isbn`).value.trim();
+
+        if (!naziv) setErr(`err-${prefix}-naziv`, "Naziv je obavezan.");
+        if (!opis) setErr(`err-${prefix}-opis`, "Opis je obavezan.");
+        if (!zanr) setErr(`err-${prefix}-zanr`, "Žanr je obavezan.");
+        if (!cena || Number(cena) < 0) setErr(`err-${prefix}-cena`, "Cena mora biti pozitivan broj.");
+        if (!strana || Number(strana) < 1) setErr(`err-${prefix}-strana`, "Broj strana mora biti veći od 0.");
+        if (!isbn || !ISBN_REGEX.test(isbn)) setErr(`err-${prefix}-isbn`, "ISBN mora biti 13 cifara u formatu 978-... ili 979-...");
+
+        return valid;
+    }
+
+    function getBookData(prefix) {
+        const slikeRaw = document.getElementById(`${prefix}-slike`).value.trim();
+        return {
+            naziv: document.getElementById(`${prefix}-naziv`).value.trim(),
+            opis: document.getElementById(`${prefix}-opis`).value.trim(),
+            zanr: document.getElementById(`${prefix}-zanr`).value.trim(),
+            format: document.getElementById(`${prefix}-format`).value.trim(),
+            cena: Number(document.getElementById(`${prefix}-cena`).value),
+            brojStrana: Number(document.getElementById(`${prefix}-strana`).value),
+            isbn: document.getElementById(`${prefix}-isbn`).value.trim(),
+            idAutora: document.getElementById(`${prefix}-autor`).value || "",
+            slike: slikeRaw ? slikeRaw.split("\n").map(s => s.trim()).filter(Boolean) : []
+        };
+    }
+
+
+    document.getElementById("add-book-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (!validateBook("add")) return;
+        const data = getBookData("add");
+        const newRef = push(ref(db, "knjige"));
+        await set(newRef, data);
+        document.getElementById("add-book-form").reset();
+        document.getElementById("err-add-general").textContent = "";
+        loadBooks();
+    });
+
+
+    function openEdit(id, book) {
+        const section = document.getElementById("edit-section");
+        section.classList.remove("hidden");
+        section.scrollIntoView({ behavior: "smooth" });
+
+        document.getElementById("edit-id").value = id;
+        document.getElementById("edit-naziv").value = book.naziv || "";
+        document.getElementById("edit-opis").value = book.opis || "";
+        document.getElementById("edit-zanr").value = book.zanr || "";
+        document.getElementById("edit-format").value = book.format || "";
+        document.getElementById("edit-cena").value = book.cena || "";
+        document.getElementById("edit-strana").value = book.brojStrana || "";
+        document.getElementById("edit-isbn").value = book.isbn || "";
+        document.getElementById("edit-autor").value = book.idAutora || "";
+        document.getElementById("edit-slike").value = book.slike ? book.slike.join("\n") : "";
+    }
+
+    document.getElementById("btn-cancel-edit").addEventListener("click", () => {
+        document.getElementById("edit-section").classList.add("hidden");
+    });
+
+
+    document.getElementById("edit-book-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (!validateBook("edit")) return;
+        const id = document.getElementById("edit-id").value;
+        const data = getBookData("edit");
+        await update(ref(db, `knjige/${id}`), data);
+        document.getElementById("edit-section").classList.add("hidden");
+        loadBooks();
+    });
+
+
+    function openDeleteModal(id) {
+        pendingDeleteId = id;
+        document.getElementById("delete-modal-overlay").classList.remove("hidden");
+    }
+
+    document.getElementById("btn-confirm-delete").addEventListener("click", async () => {
+        if (pendingDeleteId) {
+            await remove(ref(db, `knjige/${pendingDeleteId}`));
+            pendingDeleteId = null;
+        }
+        document.getElementById("delete-modal-overlay").classList.add("hidden");
+        loadBooks();
+    });
+
+    document.getElementById("btn-cancel-delete").addEventListener("click", () => {
+        pendingDeleteId = null;
+        document.getElementById("delete-modal-overlay").classList.add("hidden");
+    });
+
+
+    await loadAuthors();
+    await loadBooks();
+</script>
 </body>
 </html>
