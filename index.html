@@ -2,7 +2,8 @@
 <html lang="sr">
 <head>
     <meta charset="UTF-8">
-    <title>Book Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Platform – Katalog knjiga</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -17,46 +18,100 @@
     <a href="admin-books.html">Admin Books</a>
     <a href="admin-authors.html">Admin Authors</a>
     <a href="profile.html">Profile</a>
-
-
 </nav>
 
 <main>
     <h2>Katalog knjiga</h2>
 
-    <div class="book-card">
-        <h3>The Silent Horizon</h3>
-        <p><b>Genre:</b> Sci-Fi</p>
-        <p>U distopijskoj budućnosti, čovek se bori protiv sistema koji kontroliše svaki aspekt života.</p>
-        <a href="book1.html">Vidi više</a>
+    <div class="search-bar">
+        <input type="text" id="search-title" placeholder="Pretraži po nazivu...">
+        <input type="text" id="search-genre" placeholder="Pretraži po žanru...">
+        <button id="btn-search" class="btn-primary">Pretraži</button>
+        <button id="btn-clear" class="btn-secondary">Poništi</button>
     </div>
 
-    <div class="book-card">
-        <h3>Shadow of Time</h3>
-        <p><b>Genre:</b> Adventure / Sci-Fi</p>
-        <p>Putovanje kroz vreme dovodi do neočekivanih posledica koje menjaju sudbinu glavnog lika.</p>
-        <a href="book2.html">Vidi više</a>
+    <div id="books-container">
+        <p>Učitavanje knjiga...</p>
     </div>
-
-    <div class="book-card">
-        <h3>Whispers of the Forest</h3>
-        <p><b>Genre:</b> Fantasy</p>
-        <p>Mistična šuma krije tajne drevnih bića i mladi istraživač otkriva svoju sudbinu.</p>
-        <a href="book3.html">Vidi više</a>
-    </div>
-
-    <div class="book-card">
-        <h3>Broken Reality</h3>
-        <p><b>Genre:</b> Drama</p>
-        <p>Priča o mladiću koji pokušava da pronađe smisao života nakon gubitka bliske osobe.</p>
-        <a href="book4.html">Vidi više</a>
-    </div>
-
 </main>
 
 <footer>
     <p>Web Dizajn Projekat 2026</p>
 </footer>
 
+<script type="module">
+    import { db } from "./js/firebase-config.js";
+    import "./js/auth.js";
+    import { ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+    let allBooks = {};
+
+    async function loadBooks() {
+        const snapshot = await get(ref(db, "knjige"));
+        if (!snapshot.exists()) {
+            document.getElementById("books-container").innerHTML = "<p>Nema knjiga u bazi.</p>";
+            return;
+        }
+        allBooks = snapshot.val();
+        renderBooks(allBooks);
+    }
+
+    function renderBooks(books) {
+        const container = document.getElementById("books-container");
+        const titleQuery = document.getElementById("search-title").value.trim().toLowerCase();
+        const genreQuery = document.getElementById("search-genre").value.trim().toLowerCase();
+
+        const entries = Object.entries(books).filter(([id, book]) => {
+            const matchTitle = !titleQuery || book.naziv.toLowerCase().includes(titleQuery);
+            const matchGenre = !genreQuery || (book.zanr || "").toLowerCase().includes(genreQuery);
+            return matchTitle && matchGenre;
+        });
+
+        if (entries.length === 0) {
+            container.innerHTML = "<p>Nema rezultata pretrage.</p>";
+            return;
+        }
+
+        container.innerHTML = entries.map(([id, book]) => {
+            const title = highlight(book.naziv, titleQuery);
+            const genre = highlight(book.zanr || "", genreQuery);
+            const img = book.slike && book.slike[0]
+                ? `<img src="${book.slike[0]}" alt="${book.naziv}" class="book-thumb">`
+                : "";
+            return `
+        <div class="book-card">
+          ${img}
+          <div class="book-card-info">
+            <h3>${title}</h3>
+            <p><b>Žanr:</b> ${genre}</p>
+            <p><b>Cena:</b> ${book.cena ? book.cena + " RSD" : "N/A"}</p>
+            <p>${(book.opis || "").substring(0, 120)}...</p>
+            <a href="book.html?id=${id}" class="btn-link">Vidi više</a>
+          </div>
+        </div>`;
+        }).join("");
+    }
+
+    function highlight(text, query) {
+        if (!query) return text;
+        const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, "gi");
+        return text.replace(regex, '<mark>$1</mark>');
+    }
+
+    document.getElementById("btn-search").addEventListener("click", () => renderBooks(allBooks));
+    document.getElementById("btn-clear").addEventListener("click", () => {
+        document.getElementById("search-title").value = "";
+        document.getElementById("search-genre").value = "";
+        renderBooks(allBooks);
+    });
+    document.getElementById("search-title").addEventListener("keyup", (e) => {
+        if (e.key === "Enter") renderBooks(allBooks);
+    });
+    document.getElementById("search-genre").addEventListener("keyup", (e) => {
+        if (e.key === "Enter") renderBooks(allBooks);
+    });
+
+    loadBooks();
+</script>
 </body>
 </html>
