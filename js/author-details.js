@@ -30,13 +30,13 @@ async function loadAuthorRatings(authorId) {
 
     document.getElementById("author-rating").textContent =
         count
-            ? `${avg} / 5 ⭐ (${count} ocena)`
+            ? `${avg} / 5 ⭐ (${count} оцена)`
             : "Нема оцена.";
 
     const list = document.getElementById("ratings-list");
 
     if (ratings.length === 0) {
-        list.innerHTML = "<p>Још нema оцена.</p>";
+        list.innerHTML = "<p>Још нeмa оцена.</p>";
         return;
     }
 
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const author = snapshot.val();
 
         if (!author) {
-            container.innerHTML = "<p>Autor nije pronađen</p>";
+            container.innerHTML = "<p>Аутор није пронађен.</p>";
             return;
         }
 
