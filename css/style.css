@@ -411,6 +411,15 @@ body.modal-open {
     flex: 1;
 }
 
+.rating-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    max-width: 350px;
+}
+
 /* Buttons  */
 .btn-primary {
     background: #111827;
