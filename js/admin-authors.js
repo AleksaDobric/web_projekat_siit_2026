@@ -60,7 +60,7 @@ function deleteAuthor(id) {
             .then(() => {
                 showToast("Аутор успешно обрисан!");
                 loadAuthors();
-            });;
+            });
     }
 }
 

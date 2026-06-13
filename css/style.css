@@ -68,6 +68,8 @@ h3, h4, h5, h6 {
     background: #f5f5f5;
 
     transition: 0.2s ease;
+
+    cursor: pointer;
 }
 
 .author-card:hover {
@@ -92,25 +94,25 @@ h3, h4, h5, h6 {
 }
 
 .author-profile {
-    max-width: 700px;
-    margin: 30px auto;
+    max-width: 1000px;
+    margin: 20px 0;
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-
-    background: #f5f5f5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    text-align: left;
+    display: block;
 }
 
-.author-profile img {
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
+#author-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 10px 0 20px 0;
+}
+
+#author-images img {
+    width: 200px;
+    height: 250px;
     object-fit: cover;
-    margin-bottom: 15px;
+    border-radius: 6px;
 }
 
 table {
@@ -150,7 +152,7 @@ th:nth-child(1), td:nth-child(1) { width: 16%; }
 th:nth-child(2), td:nth-child(2) { width: 15%; }
 th:nth-child(3), td:nth-child(3) { width: 12%; }
 th:nth-child(4), td:nth-child(4) { width: 12%; }
-th:nth-child(5), td:nth-child(5) { width: 10%; }
+th:nth-child(5), td:nth-child(5) { width: 15%; }
 th:nth-child(6), td:nth-child(6) { width: 15%; }
 th:nth-child(7), td:nth-child(7) { width: 16%; }
 th:nth-child(8), td:nth-child(8) { width: 12%; }
@@ -342,6 +344,71 @@ body.modal-open {
 
 #open-add:hover {
     background: #374151;
+}
+
+#stars {
+    display: flex;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.star {
+    font-size: 40px;
+    color: #ccc;
+    cursor: pointer;
+    transition: 0.2s;
+    user-select: none;
+}
+
+.star:hover {
+    transform: scale(1.15);
+}
+
+.star.active {
+    color: gold;
+}
+
+.author-rating-box {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    max-width: 400px;
+}
+
+.author-rating-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    max-width: 400px;
+}
+
+.search-bar-author {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    width: 400px;
+    margin: 20px auto;
+}
+
+.search-bar-author input,
+.search-bar-author select {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.search-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.search-buttons button {
+    flex: 1;
 }
 
 /* Buttons  */

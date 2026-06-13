@@ -22,6 +22,22 @@
 <main>
     <h2>Листа Аутора</h2>
 
+    <div class="search-bar-author">
+        <input type="text" id="search-name" placeholder="Претражи по имену аутора">
+
+        <select id="search-status">
+            <option value="">Сви статуси</option>
+            <option value="Активан">Активан</option>
+            <option value="У пензији">У пензији</option>
+            <option value="Преминуо">Преминуо</option>
+        </select>
+
+        <div class="search-buttons">
+            <button id="btn-search" class="btn-primary">Претражи</button>
+            <button id="btn-clear" class="btn-secondary">Поништи</button>
+        </div>
+    </div>
+
     <div id="authors-container"></div>
 </main>
 
