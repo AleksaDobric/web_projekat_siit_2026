@@ -14,7 +14,7 @@
 
 <nav>
     <a href="index.html">Home</a>
-    <a href="author-list.html">Authors</a>
+    <a href="authors.html">Authors</a>
     <a href="admin-books.html">Admin Books</a>
     <a href="admin-authors.html">Admin Authors</a>
     <a href="profile.html">Profile</a>
@@ -130,6 +130,8 @@
     <p>Web Dizajn Projekat 2026</p>
 </footer>
 
+<div id="toast" class="toast"></div>
+
 <script type="module">
     import { db } from "./js/firebase-config.js";
     import "./js/auth.js";
@@ -137,12 +139,19 @@
         ref, get, push, set, remove, update
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
+    function showToast(message, type = "success") {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.className = `toast ${type} show`;
+        setTimeout(() => toast.classList.remove("show"), 2500);
+    }
+
     const ISBN_REGEX = /^(978|979)-?\d{1,5}-?\d{1,7}-?\d{1,6}-?\d$/;
 
     let allAuthors = {};
     let pendingDeleteId = null;
 
-    // ── Load authors for selects ──
+    
     async function loadAuthors() {
         const snap = await get(ref(db, "autori"));
         if (!snap.exists()) return;
@@ -154,7 +163,7 @@
         document.getElementById("edit-autor").insertAdjacentHTML("beforeend", options);
     }
 
-
+    
     async function loadBooks() {
         const snap = await get(ref(db, "knjige"));
         const container = document.getElementById("books-table-container");
@@ -197,7 +206,7 @@
         );
     }
 
-
+    
     function validateBook(prefix) {
         let valid = true;
         const clearErr = id => document.getElementById(id).textContent = "";
@@ -237,7 +246,7 @@
         };
     }
 
-
+    
     document.getElementById("add-book-form").addEventListener("submit", async (e) => {
         e.preventDefault();
         if (!validateBook("add")) return;
@@ -246,10 +255,11 @@
         await set(newRef, data);
         document.getElementById("add-book-form").reset();
         document.getElementById("err-add-general").textContent = "";
+        showToast("Knjiga je uspešno dodata!");
         loadBooks();
     });
 
-
+    
     function openEdit(id, book) {
         const section = document.getElementById("edit-section");
         section.classList.remove("hidden");
@@ -271,7 +281,7 @@
         document.getElementById("edit-section").classList.add("hidden");
     });
 
-
+    
     document.getElementById("edit-book-form").addEventListener("submit", async (e) => {
         e.preventDefault();
         if (!validateBook("edit")) return;
@@ -279,10 +289,11 @@
         const data = getBookData("edit");
         await update(ref(db, `knjige/${id}`), data);
         document.getElementById("edit-section").classList.add("hidden");
+        showToast("Knjiga je uspešno izmenjena!");
         loadBooks();
     });
 
-
+    
     function openDeleteModal(id) {
         pendingDeleteId = id;
         document.getElementById("delete-modal-overlay").classList.remove("hidden");
@@ -294,6 +305,7 @@
             pendingDeleteId = null;
         }
         document.getElementById("delete-modal-overlay").classList.add("hidden");
+        showToast("Knjiga je uspešno obrisana!", "error");
         loadBooks();
     });
 
@@ -302,7 +314,7 @@
         document.getElementById("delete-modal-overlay").classList.add("hidden");
     });
 
-
+    
     await loadAuthors();
     await loadBooks();
 </script>
