@@ -165,6 +165,35 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("author-sold").textContent =
             author.brojProdatihPrimeraka;
 
+            const booksSnap = await db.ref("knjige").once("value");
+
+            const books = [];
+
+            booksSnap.forEach(child => {
+                const book = child.val();
+
+                if (book.idAutora === authorId) {
+                    books.push({
+                        id: child.key,
+                        naziv: book.naziv
+                    });
+                }
+            });
+
+            const booksContainer = document.getElementById("author-books");
+
+            if (books.length === 0) {
+                booksContainer.innerHTML = "<p>Нема евидентираних дела.</p>";
+            } else {
+                booksContainer.innerHTML = books.map(book => `
+                    <p>
+                        <a href="book.html?id=${book.id}">
+                            ${book.naziv}
+                        </a>
+                    </p>
+                `).join("");
+        }
+
         await loadAuthorRatings(authorId);
 
         renderRatingSystem(authorId);

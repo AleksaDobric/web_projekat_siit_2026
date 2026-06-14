@@ -37,7 +37,7 @@ function getFormData(form) {
         brojOsvojenihNagrada: form.elements["awards"].value,
         brojProdatihPrimeraka: form.elements["sold"].value,
         kontaktTelefonMenadzera: form.elements["phone"].value,
-        slike: form.elements["image"].value ? [form.elements["image"].value] : [],
+        slike: form.elements["image"].value.split("\n").map(url => url.trim()).filter(url => url !== ""),
         biografija: form.elements["bio"].value
     };
 }
@@ -50,7 +50,7 @@ function fillForm(form, author) {
     form.elements["awards"].value = author.brojOsvojenihNagrada;
     form.elements["sold"].value = author.brojProdatihPrimeraka;
     form.elements["phone"].value = author.kontaktTelefonMenadzera;
-    form.elements["image"].value = author.slike?.[0] || "";
+    form.elements["image"].value = (author.slike || []).join("\n");
     form.elements["bio"].value = author.biografija;
 }
 
@@ -155,8 +155,11 @@ function loadAuthors() {
             const row = document.createElement("tr");
 
             row.innerHTML = `
-                <td>${author.ime}</td>
-                <td>${author.prezime}</td>
+                <td>
+                    <a href="author-details.html?id=${id}">
+                        ${author.ime} ${author.prezime || ""}
+                    </a>
+                </td>
                 <td>${formatDate(author.datumRodjenja)}</td>
                 <td>
                     <span class="status status-${getStatusClass(author.status)}">
@@ -167,8 +170,8 @@ function loadAuthors() {
                 <td>${Number(author.brojProdatihPrimeraka || 0).toLocaleString("de-DE")}</td>
                 <td>${author.kontaktTelefonMenadzera || ""}</td>
                 <td>
-                    <button class="edit-btn">Edit</button>
-                    <button class="delete-btn">Delete</button>
+                    <button class="edit-btn">Измени</button>
+                    <button class="delete-btn">Обриши</button>
                 </td>
             `;
 

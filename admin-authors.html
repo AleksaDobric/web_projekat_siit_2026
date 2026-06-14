@@ -30,8 +30,7 @@
     <table border="1" cellpadding="8">
         <thead>
             <tr>
-                <th>Име</th>
-                <th>Презиме</th>
+                <th>Аутор</th>
                 <th>Датум рођења</th>
                 <th>Статус</th>
                 <th>Број освојених награда</th>
@@ -53,7 +52,7 @@
 
     <form id="add-author-form">
         <input type="text" name="name" placeholder="Име"><br><br>
-        <input type="text" name="surname" placeholder="Презиме (није обавезно)"><br><br>
+        <input type="text" name="surname" placeholder="Презиме (није обавезно ако га аутор нема, нпр. Платон)"><br><br>
         <input type="date" name="date"><br><br>
 
         <select name="status">
@@ -66,8 +65,8 @@
         <input type="number" name="awards" placeholder="Број освојених награда"><br><br>
         <input type="number" name="sold" placeholder="Број продатих примерака"><br><br>
         <input type="text" name="phone" placeholder="Контакт телефон менаџера (+381 65 123-4567)"><br><br>
-        <input type="text" name="image" placeholder="Слика (URL)"><br><br>
-
+        
+        <textarea name="image" placeholder="Један URL слике по реду (најмање 1 слика)"></textarea>
         <textarea name="bio" placeholder="Биографија"></textarea><br><br>
 
         <button type="button">Додај аутора</button>
@@ -83,7 +82,7 @@
 
     <form id="edit-author-form">
          <input type="text" name="name" placeholder="Име"><br><br>
-        <input type="text" name="surname" placeholder="Презиме (није обавезно)"><br><br>
+        <input type="text" name="surname" placeholder="Презиме (није обавезно ако га аутор нема, нпр. Платон)"><br><br>
         <input type="date" name="date"><br><br>
 
         <select name="status">
@@ -96,8 +95,8 @@
         <input type="number" name="awards" placeholder="Број освојених награда"><br><br>
         <input type="number" name="sold" placeholder="Број продатих примерака"><br><br>
         <input type="text" name="phone" placeholder="Контакт телефон менаџера (+381 65 123-4567)"><br><br>
-        <input type="text" name="image" placeholder="Слика (URL)"><br><br>
-
+        
+        <textarea name="image" placeholder="Један URL слике по реду (најмање 1 слика)"></textarea>
         <textarea name="bio" placeholder="Биографија"></textarea><br><br>
 
         <button type="button">Сачувај измене</button>
@@ -117,6 +116,7 @@
 
 <script src="js/firebase.js"></script>
 <script src="js/admin-authors.js"></script>
+<script type="module" src="js/auth.js"></script>
 
 <div id="toast" class="toast"></div>
 
