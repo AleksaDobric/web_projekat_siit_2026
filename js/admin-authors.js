@@ -1,4 +1,5 @@
 const tableBody = document.getElementById("authors-table-body");
+const authorsCountNumber = document.getElementById("authors-count-number");
 
 const addForm = document.getElementById("add-author-form");
 const editForm = document.getElementById("edit-author-form");
@@ -148,6 +149,9 @@ function loadAuthors() {
     db.ref("autori").once("value", (snapshot) => {
         const data = snapshot.val();
         tableBody.innerHTML = "";
+
+        const count = data ? Object.keys(data).length : 0;
+        if (typeof authorsCountNumber !== "undefined" && authorsCountNumber) authorsCountNumber.textContent = count.toLocaleString();
 
         for (let id in data) {
             const author = data[id];
