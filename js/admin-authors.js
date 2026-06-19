@@ -1,11 +1,11 @@
 const tableBody = document.getElementById("authors-table-body");
-const authorsCountNumber = document.getElementById("authors-count-number");
 
 const addForm = document.getElementById("add-author-form");
 const editForm = document.getElementById("edit-author-form");
 
 const addModal = document.getElementById("add-modal");
 const editModal = document.getElementById("edit-modal");
+const deleteModal = document.getElementById("delete-modal");
 
 const fieldLabels = {
     ime: "Име",
@@ -55,14 +55,13 @@ function fillForm(form, author) {
     form.elements["bio"].value = author.biografija;
 }
 
+let authorToDelete = null;
+
 function deleteAuthor(id) {
-    if (confirm("Да ли сте сигурни да желите да обришете овог аутора?")) {
-        db.ref("autori/" + id).remove()
-            .then(() => {
-                showToast("Аутор успешно обрисан!");
-                loadAuthors();
-            });
-    }
+    authorToDelete = id;
+
+    deleteModal.style.display = "flex";
+    document.body.classList.add("modal-open");
 }
 
 function formatDate(dateStr) {
@@ -150,9 +149,6 @@ function loadAuthors() {
         const data = snapshot.val();
         tableBody.innerHTML = "";
 
-        const count = data ? Object.keys(data).length : 0;
-        if (typeof authorsCountNumber !== "undefined" && authorsCountNumber) authorsCountNumber.textContent = count.toLocaleString();
-
         for (let id in data) {
             const author = data[id];
 
@@ -174,8 +170,8 @@ function loadAuthors() {
                 <td>${Number(author.brojProdatihPrimeraka || 0).toLocaleString("de-DE")}</td>
                 <td>${author.kontaktTelefonMenadzera || ""}</td>
                 <td>
-                    <button class="edit-btn">Измени</button>
-                    <button class="delete-btn">Обриши</button>
+                    <button class="btn-edit edit-btn">✏️ Izmeni</button>
+                    <button class="btn-danger delete-btn">🗑️ Obriši</button>
                 </td>
             `;
 
@@ -253,4 +249,26 @@ window.onclick = (e) => {
         editModal.style.display = "none";
         document.body.classList.remove("modal-open");
     }
+};
+
+document.getElementById("confirm-delete").onclick = () => {
+
+    db.ref("autori/" + authorToDelete).remove()
+        .then(() => {
+
+            showToast("Аутор успешно обрисан!");
+
+            deleteModal.style.display = "none";
+            document.body.classList.remove("modal-open");
+
+            loadAuthors();
+        });
+};
+
+
+document.getElementById("cancel-delete").onclick = () => {
+
+    deleteModal.style.display = "none";
+    document.body.classList.remove("modal-open");
+
 };

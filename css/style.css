@@ -154,7 +154,7 @@ th:nth-child(3), td:nth-child(3) { width: 12%; }
 th:nth-child(4), td:nth-child(4) { width: 14%; }
 th:nth-child(5), td:nth-child(5) { width: 15%; }
 th:nth-child(6), td:nth-child(6) { width: 15%; }
-th:nth-child(7), td:nth-child(7) { width: 14%; }
+th:nth-child(7), td:nth-child(7) { width: 23%; }
 
 form {
     padding: 20px;
@@ -419,6 +419,72 @@ body.modal-open {
     max-width: 350px;
 }
 
+.delete-box {
+    max-width: 350px;
+    padding: 20px;
+    text-align: center;
+}
+
+.delete-box h2 {
+    margin-bottom: 10px;
+}
+
+.delete-box p {
+    margin: 0 0 15px 0;
+    line-height: 1.4;
+}
+
+.delete-box .modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.delete-box #confirm-delete {
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.delete-box #confirm-delete:hover {
+    background: #b91c1c;
+}
+
+.delete-box #cancel-delete {
+    background: #9ca3af;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.delete-box #cancel-delete:hover {
+    background: #6b7280;
+}
+
+.btn-edit {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-edit:hover {
+    background: #1d4ed8;
+}
+
+.edit-btn,
+.delete-btn {
+    margin: 3px;
+}
+
 /* Buttons  */
 .btn-primary {
     background: #111827;
@@ -672,16 +738,10 @@ mark {
 .hidden { display: none !important; }
 
 /* Responsive */
-@media (max-width: 600px) {
-    .book-card { flex-direction: column; }
-    .book-thumb { width: 100%; height: 200px; }
-    .modal-box { padding: 20px; margin: 0 12px; }
-    .search-bar { flex-direction: column; }
-}
-
 @media (max-width: 768px) {
     nav {
         flex-direction: column;
+        gap: 10px;
     }
 
     main {
@@ -689,9 +749,52 @@ mark {
     }
 
     .book-card,
-    table,
+    .author-card {
+        flex-direction: column;
+    }
+
+    .book-thumb {
+        width: 100%;
+        height: 200px;
+    }
+
+    .search-bar {
+        flex-direction: column;
+    }
+
     form input,
-    form textarea {
+    form textarea,
+    form select {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .modal-box {
+        width: calc(100% - 24px);
+        margin: 12px;
+        padding: 20px;
+    }
+
+    .table-wrapper {
+        width: 100%;
         max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        overflow-y: hidden;
+
+        display: block;
+        position: relative;
+    }
+
+    .table-wrapper table {
+        width: max-content;
+        min-width: 100%;
+        border-collapse: collapse;
+        display: inline-table;
+    }
+
+    table button {
+        margin: 3px;
+        white-space: nowrap;
     }
 }

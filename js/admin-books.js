@@ -61,12 +61,14 @@ function loadBooks() {
         }
 
         container.innerHTML = `
-            <table>
-                <thead><tr>
-                    <th>Naziv</th><th>Žanr</th><th>Cena</th><th>ISBN</th><th>Autor</th><th>Akcije</th>
-                </tr></thead>
-                <tbody>${rows}</tbody>
-            </table>`;
+            <div class="table-wrapper">    
+                <table>
+                    <thead><tr>
+                        <th>Naziv</th><th>Žanr</th><th>Cena</th><th>ISBN</th><th>Autor</th><th>Akcije</th>
+                    </tr></thead>
+                    <tbody>${rows}</tbody>
+                </table>
+            </div>`;
     });
 }
 

@@ -19,6 +19,29 @@
     <a href="profile.html">Profile</a>
 </nav>
 
+<div id="delete-modal" class="modal">
+    <div class="modal-content delete-box">
+
+        <h2>Потврда брисања</h2>
+
+        <p>
+            Да ли сте сигурни да желите да обришете овог аутора?
+            Ова радња се не може поништити.
+        </p>
+
+        <div class="modal-actions">
+            <button id="confirm-delete" class="btn-danger">
+                Обриши
+            </button>
+
+            <button id="cancel-delete" class="btn-secondary">
+                Откажи
+            </button>
+        </div>
+
+    </div>
+</div>
+
 <main>
 
     <h2>Листа Аутора</h2>
@@ -27,25 +50,24 @@
         <button id="open-add">➕ Додај аутора</button>
     </div>
 
-    <div id="authors-count" style="margin:10px 0; font-weight:600;">Укупно аутора: <span id="authors-count-number">0</span></div>
+    <div class="table-wrapper">
+        <table border="1" cellpadding="8">
+            <thead>
+                <tr>
+                    <th>Аутор</th>
+                    <th>Датум рођења</th>
+                    <th>Статус</th>
+                    <th>Број освојених награда</th>
+                    <th>Број продатих примерака</th>
+                    <th>Контакт телефон менаџера</th>
+                    <th>Опције</th>
+                </tr>
+            </thead>
 
-    <table border="1" cellpadding="8">
-        <thead>
-            <tr>
-                <th>Аутор</th>
-                <th>Датум рођења</th>
-                <th>Статус</th>
-                <th>Број освојених награда</th>
-                <th>Број продатих примерака</th>
-                <th>Контакт телефон менаџера</th>
-                <th>Опције</th>
-            </tr>
-        </thead>
-
-    <tbody id="authors-table-body">
-
-    </tbody>
-</table>
+            <tbody id="authors-table-body">
+            </tbody>
+        </table>
+    </div>
 
 <div id="add-modal" class="modal">
   <div class="modal-content">
