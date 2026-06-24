@@ -54,8 +54,8 @@ function loadBooks() {
                     <td>${b.isbn || "N/A"}</td>
                     <td>${authorName}</td>
                     <td>
-                        <button class="btn-secondary" onclick="openEdit('${id}')">Izmeni</button>
-                        <button class="btn-danger" onclick="openDeleteModal('${id}')">Obriši</button>
+                        <button class="btn-book-edit" onclick="openEdit('${id}')">✏️ Izmeni</button>
+                        <button class="btn-book-delete" onclick="openDeleteModal('${id}')">🗑️ Obriši</button>
                     </td>
                 </tr>`;
         }

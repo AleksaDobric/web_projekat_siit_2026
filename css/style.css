@@ -737,6 +737,45 @@ mark {
 /* Hidden utility */
 .hidden { display: none !important; }
 
+/* Books table action buttons (Student 1 only - isolated, pill-shaped) */
+.btn-book-edit {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.btn-book-edit:hover { background: #1d4ed8; }
+
+.btn-book-delete {
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    margin-left: 6px;
+}
+.btn-book-delete:hover { background: #b91c1c; }
+
+#books-table-container th:nth-child(1), #books-table-container td:nth-child(1) { width: 18%; }
+#books-table-container th:nth-child(2), #books-table-container td:nth-child(2) { width: 12%; }
+#books-table-container th:nth-child(3), #books-table-container td:nth-child(3) { width: 10%; }
+#books-table-container th:nth-child(4), #books-table-container td:nth-child(4) { width: 14%; }
+#books-table-container th:nth-child(5), #books-table-container td:nth-child(5) { width: 16%; }
+#books-table-container th:nth-child(6), #books-table-container td:nth-child(6) { width: 30%; }
+
+#books-table-container td:last-child {
+    white-space: nowrap;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     nav {
@@ -796,5 +835,17 @@ mark {
     table button {
         margin: 3px;
         white-space: nowrap;
+    }
+
+    #books-table-container td:last-child {
+        white-space: normal;
+    }
+
+    #books-table-container td:last-child .btn-book-edit,
+    #books-table-container td:last-child .btn-book-delete {
+        display: block;
+        width: 100%;
+        margin: 6px 0;
+        box-sizing: border-box;
     }
 }
